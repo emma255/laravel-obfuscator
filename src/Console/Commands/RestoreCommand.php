@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Console\Commands;
+namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Honeycrisp\Honeycrisp\Services\LicenseService;
+use Honeycrisp\\LaravelObfuscator\Services\LicenseService;
 
 class RestoreCommand extends Command
 {

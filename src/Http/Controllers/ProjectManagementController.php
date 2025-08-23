@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Http\Controllers;
+namespace Honeycrisp\\LaravelObfuscator\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Honeycrisp\Honeycrisp\Models\Project;
-use Honeycrisp\Honeycrisp\Models\AuditLog;
-use Honeycrisp\Honeycrisp\Services\ObfuscatorService;
-use Honeycrisp\Honeycrisp\Services\DeobfuscatorService;
+use Honeycrisp\\LaravelObfuscator\Models\Project;
+use Honeycrisp\\LaravelObfuscator\Models\AuditLog;
+use Honeycrisp\\LaravelObfuscator\Services\ObfuscatorService;
+use Honeycrisp\\LaravelObfuscator\Services\DeobfuscatorService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Http\Controllers;
+namespace Honeycrisp\\LaravelObfuscator\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Honeycrisp\Honeycrisp\Models\User;
-use Honeycrisp\Honeycrisp\Models\AuditLog;
+use Honeycrisp\\LaravelObfuscator\Models\User;
+use Honeycrisp\\LaravelObfuscator\Models\AuditLog;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;

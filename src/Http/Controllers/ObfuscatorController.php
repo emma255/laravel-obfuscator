@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Http\Controllers;
+namespace Honeycrisp\\LaravelObfuscator\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Honeycrisp\Honeycrisp\Services\ObfuscatorService;
+use Honeycrisp\\LaravelObfuscator\Services\ObfuscatorService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 

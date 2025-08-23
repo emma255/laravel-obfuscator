@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Services;
+namespace Honeycrisp\\LaravelObfuscator\Services;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;

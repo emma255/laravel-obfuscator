@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Console\Commands;
+namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Honeycrisp\Honeycrisp\Services\ObfuscatorService;
+use Honeycrisp\\LaravelObfuscator\Services\ObfuscatorService;
 use Illuminate\Support\Facades\File;
 
 class ObfuscateCommand extends Command

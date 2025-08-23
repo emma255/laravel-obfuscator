@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Console\Commands;
+namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Honeycrisp\Honeycrisp\Services\LicenseService;
+use Honeycrisp\\LaravelObfuscator\Services\LicenseService;
 
 class LicenseCommand extends Command
 {

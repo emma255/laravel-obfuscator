@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Console\Commands;
+namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Honeycrisp\Honeycrisp\Services\DeobfuscatorService;
+use Honeycrisp\\LaravelObfuscator\Services\DeobfuscatorService;
 
 class DeobfuscateSecureDeployCommand extends Command
 {

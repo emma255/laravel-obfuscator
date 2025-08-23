@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp\Models;
+namespace Honeycrisp\\LaravelObfuscator\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
