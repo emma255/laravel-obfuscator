@@ -52,13 +52,18 @@ class ObfuscatorService
     /**
      * Obfuscate a PHP file
      */
-    public function obfuscateFile(string $inputFile, string $outputFile = null, string $level = 'basic', array $options = []): string
+    public function obfuscateFile(string $inputFile, string $outputFile = null, bool $backup = false, string $level = 'basic', array $options = []): string
     {
         try {
             $this->checkLicense();
             
             if (!file_exists($inputFile)) {
                 throw new \Exception("Input file not found: {$inputFile}");
+            }
+            
+            // Create backup if requested
+            if ($backup) {
+                $this->createBackup($inputFile);
             }
             
             $sourceCode = file_get_contents($inputFile);
@@ -96,7 +101,7 @@ class ObfuscatorService
                 $outputPath = $this->generateOutputPath($filePath);
                 
                 try {
-                    $this->obfuscateFile($filePath, $outputPath, $backup);
+                    $this->obfuscateFile($filePath, $outputPath, $backup, 'basic');
                     $results[] = [
                         'input' => $filePath,
                         'output' => $outputPath,
@@ -223,7 +228,7 @@ class ObfuscatorService
      */
     public function createBackup(string $filePath, string $customName = null): string
     {
-        $backupDir = config('laravel-obfuscator.backup_directory', storage_path('app/obfuscator_backups'));
+        $backupDir = config('laravel-obfuscator.backup.directory', storage_path('app/obfuscator_backups'));
         if (!File::exists($backupDir)) {
             File::makeDirectory($backupDir, 0755, true);
         }

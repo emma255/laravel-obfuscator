@@ -111,7 +111,7 @@ class SecureDeployCommand extends Command
         }
         
         // Obfuscate the file
-        $obfuscatedPath = $obfuscator->obfuscateFile($source, null, $level);
+                        $obfuscatedPath = $obfuscator->obfuscateFile($source, null, false, $level);
         
         // Move obfuscated file to replace original
         if (rename($obfuscatedPath, $source)) {
@@ -162,7 +162,7 @@ class SecureDeployCommand extends Command
         
         foreach ($phpFiles as $file) {
             try {
-                $obfuscatedPath = $obfuscator->obfuscateFile($file, null, $level);
+                $obfuscatedPath = $obfuscator->obfuscateFile($file, null, false, $level);
                 
                 // Replace original with obfuscated
                 if (rename($obfuscatedPath, $file)) {

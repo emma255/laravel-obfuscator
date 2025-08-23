@@ -33,7 +33,7 @@ return [
     */
     'backup' => [
         'enabled' => env('HONEYCRISP_BACKUP_ENABLED', true),
-        'directory' => env('HONEYCRISP_BACKUP_DIR', 'app/honeycrisp_backups'),
+        'directory' => env('HONEYCRISP_BACKUP_DIR', storage_path('app/honeycrisp_backups')),
         'keep_backups' => env('HONEYCRISP_KEEP_BACKUPS', 10), // Number of backups to keep
     ],
 

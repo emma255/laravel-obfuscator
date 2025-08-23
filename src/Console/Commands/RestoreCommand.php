@@ -40,7 +40,7 @@ class RestoreCommand extends Command
         $backupFileName = $this->argument('backup_file_name');
         
         try {
-            $backupDir = storage_path('app/obfuscator_backups');
+            $backupDir = config('laravel-obfuscator.backup.directory', storage_path('app/obfuscator_backups'));
             
             if (!File::exists($backupDir)) {
                 $this->error('Backup directory not found. No backups have been created yet.');
