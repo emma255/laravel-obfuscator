@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
+namespace Honeycrisp\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;

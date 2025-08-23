@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeycrisp\\LaravelObfuscator\Services;
+namespace Honeycrisp\LaravelObfuscator\Services;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;

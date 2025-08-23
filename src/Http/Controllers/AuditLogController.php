@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeycrisp\\LaravelObfuscator\Http\Controllers;
+namespace Honeycrisp\LaravelObfuscator\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Honeycrisp\\LaravelObfuscator\Models\AuditLog;
-use Honeycrisp\\LaravelObfuscator\Models\User;
-use Honeycrisp\\LaravelObfuscator\Models\Project;
+use Honeycrisp\LaravelObfuscator\Models\AuditLog;
+use Honeycrisp\LaravelObfuscator\Models\User;
+use Honeycrisp\LaravelObfuscator\Models\Project;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 

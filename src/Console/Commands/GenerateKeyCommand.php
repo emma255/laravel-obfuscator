@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
+namespace Honeycrisp\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Honeycrisp\\LaravelObfuscator\Services\LicenseService;
+use Honeycrisp\LaravelObfuscator\Services\LicenseService;
 
 class GenerateKeyCommand extends Command
 {

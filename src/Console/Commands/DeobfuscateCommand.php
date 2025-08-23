@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
+namespace Honeycrisp\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Honeycrisp\\LaravelObfuscator\Services\DeobfuscatorService;
+use Honeycrisp\LaravelObfuscator\Services\DeobfuscatorService;
 use Illuminate\Support\Facades\File;
 
 class DeobfuscateCommand extends Command

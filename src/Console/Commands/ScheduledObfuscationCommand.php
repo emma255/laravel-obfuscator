@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeycrisp\\LaravelObfuscator\Console\Commands;
+namespace Honeycrisp\LaravelObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Honeycrisp\\LaravelObfuscator\Models\Project;
-use Honeycrisp\\LaravelObfuscator\Models\AuditLog;
-use Honeycrisp\\LaravelObfuscator\Services\ObfuscatorService;
-use Honeycrisp\\LaravelObfuscator\Services\LicenseService;
+use Honeycrisp\LaravelObfuscator\Models\Project;
+use Honeycrisp\LaravelObfuscator\Models\AuditLog;
+use Honeycrisp\LaravelObfuscator\Services\ObfuscatorService;
+use Honeycrisp\LaravelObfuscator\Services\LicenseService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;

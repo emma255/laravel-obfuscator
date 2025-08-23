@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeycrisp\\LaravelObfuscator\Services;
+namespace Honeycrisp\LaravelObfuscator\Services;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Honeycrisp\\LaravelObfuscator\Services\LicenseService;
+use Honeycrisp\LaravelObfuscator\Services\LicenseService;
 
 class ObfuscatorService
 {
