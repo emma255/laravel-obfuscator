@@ -84,7 +84,7 @@ class LicenseCommand extends Command
             $this->info('Type: Generated License');
             $this->info('');
             $this->info('To activate this license, add to your .env file:');
-            $this->info("HONEYCRISP_LICENSE_KEY={$licenseKey}");
+            $this->info("HONEYCRISP_OBFUSCATOR_LICENSE_KEY={$licenseKey}");
         } else {
             $this->error('❌ Invalid License Key!');
             $this->info('Generate a new key with: php artisan obfuscate:generate-key');

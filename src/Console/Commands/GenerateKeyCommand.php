@@ -33,7 +33,7 @@ class GenerateKeyCommand extends Command
         $this->newLine();
         
         $this->info('📝 Add this to your .env file:');
-        $this->line("HONEYCRISP_LICENSE_KEY={$key}");
+        $this->line("HONEYCRISP_OBFUSCATOR_LICENSE_KEY={$key}");
         $this->newLine();
         
         $this->info('💡 After adding the key to .env, run:');

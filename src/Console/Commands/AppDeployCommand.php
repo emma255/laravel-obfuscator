@@ -32,7 +32,7 @@ class AppDeployCommand extends Command
         $force = $this->option('force');
 
         // Check for license key in environment
-        $licenseKey = env('HONEYCRISP_LICENSE_KEY');
+        $licenseKey = env('HONEYCRISP_OBFUSCATOR_LICENSE_KEY');
         if (!$licenseKey) {
             $this->error('❌ No license key found!');
             $this->info('Generate a key with: php artisan obfuscate:generate-key');
