@@ -1,28 +1,28 @@
 <?php
 
-namespace Honeycrisp\Honeycrisp;
+namespace Honeycrisp\LaravelObfuscator;
 
 use Illuminate\Support\ServiceProvider;
-use Honeycrisp\Honeycrisp\Services\ObfuscatorService;
-use Honeycrisp\Honeycrisp\Services\DeobfuscatorService;
-use Honeycrisp\Honeycrisp\Services\LicenseService;
-use Honeycrisp\Honeycrisp\Console\Commands\ObfuscateCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\ObfuscateAllCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\ObfuscateDirectoryCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\RestoreCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\DeobfuscateCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\DeobfuscateAllCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\DeobfuscateDirectoryCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\ScheduledObfuscationCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\LicenseCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\GenerateLicenseCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\GenerateKeyCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\SecureDeployCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\DeobfuscateSecureDeployCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\AppDeployCommand;
-use Honeycrisp\Honeycrisp\Console\Commands\AppDeobfuscateCommand;
+use Honeycrisp\LaravelObfuscator\Services\ObfuscatorService;
+use Honeycrisp\LaravelObfuscator\Services\DeobfuscatorService;
+use Honeycrisp\LaravelObfuscator\Services\LicenseService;
+use Honeycrisp\LaravelObfuscator\Console\Commands\ObfuscateCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\ObfuscateAllCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\ObfuscateDirectoryCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\RestoreCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\DeobfuscateCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\DeobfuscateAllCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\DeobfuscateDirectoryCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\ScheduledObfuscationCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\LicenseCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\GenerateLicenseCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\GenerateKeyCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\SecureDeployCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\DeobfuscateSecureDeployCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\AppDeployCommand;
+use Honeycrisp\LaravelObfuscator\Console\Commands\AppDeobfuscateCommand;
 
-class HoneycrispServiceProvider extends ServiceProvider
+class LaravelObfuscatorServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
