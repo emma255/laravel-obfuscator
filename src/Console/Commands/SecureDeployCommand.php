@@ -231,8 +231,19 @@ class SecureDeployCommand extends Command
     {
         $secureBackupDir = storage_path('app/secure_deployment_backups/' . date('Y-m-d_H-i-s'));
         
+        // Ensure proper path handling for Windows
+        $secureBackupDir = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $secureBackupDir);
+        
         if (!File::exists($secureBackupDir)) {
-            File::makeDirectory($secureBackupDir, 0750, true);
+            try {
+                File::makeDirectory($secureBackupDir, 0750, true);
+            } catch (\Exception $e) {
+                // Fallback: create in current directory if storage path fails
+                $secureBackupDir = getcwd() . DIRECTORY_SEPARATOR . 'secure_deployment_backups_' . date('Y-m-d_H-i-s');
+                if (!File::exists($secureBackupDir)) {
+                    File::makeDirectory($secureBackupDir, 0750, true);
+                }
+            }
         }
         
         if (is_dir($path)) {
