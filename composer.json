@@ -1,0 +1,62 @@
+{
+    "name": "honeycrisp/laravel-obfuscator",
+    "description": "A comprehensive Laravel package for PHP code obfuscation with backup and restore functionality. Provides unique command structure with enhanced features.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "obfuscation",
+        "php",
+        "security",
+        "code-protection",
+        "artisan",
+        "commands",
+        "backup",
+        "restore"
+    ],
+    "authors": [
+        {
+            "name": "Rakesh Maity",
+            "email": "rakeshmaity271@gmail.com",
+            "homepage": "https://github.com/rakeshmaity271"
+        }
+    ],
+    "require": {
+        "php": "^8.1|^8.2|^8.3|^8.4",
+        "laravel/framework": "^9.0|^10.0|^11.0|^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.0|^8.0",
+        "phpunit/phpunit": "^9.0|^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Honeycrisp\\LaravelObfuscator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Honeycrisp\\LaravelObfuscator\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Honeycrisp\\LaravelObfuscator\\LaravelObfuscatorServiceProvider"
+            ],
+            "aliases": {
+                "Obfuscator": "Honeycrisp\\LaravelObfuscator\\Services\\ObfuscatorService"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "homepage": "https://github.com/rakeshmaity271/laravel-obfuscator",
+    "support": {
+        "issues": "https://github.com/rakeshmaity271/laravel-obfuscator/issues",
+        "source": "https://github.com/rakeshmaity271/laravel-obfuscator"
+    }
+}
