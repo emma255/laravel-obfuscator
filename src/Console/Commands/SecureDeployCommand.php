@@ -59,6 +59,7 @@ class SecureDeployCommand extends Command
                 'storage/framework/cache',
                 'storage/framework/sessions',
                 'storage/framework/views',
+                'storage/app/secure_deployment_backups',
                 '.git',
                 '.env',
                 'composer.lock',
@@ -76,7 +77,7 @@ class SecureDeployCommand extends Command
         $this->warn('🔒  Original files will be moved to SECURE backup location.');
         $this->info("🔒  Source: {$source}");
         $this->info("🔒  Excluding: " . implode(', ', $exclude));
-        
+
         if (!$this->confirm('Are you ready to create a secure deployment package?')) {
             $this->info('Secure deployment cancelled.');
             return Command::SUCCESS;
@@ -100,28 +101,28 @@ class SecureDeployCommand extends Command
     private function deployFile(ObfuscatorService $obfuscator, string $source, ?string $output, string $level, bool $createPackage): int
     {
         $this->info("🔒  Securely deploying file: {$source}");
-        
+
         // Create secure backup first
         $secureBackupPath = $this->createSecureBackup($source);
         $this->info("🔒  Original file securely backed up to: {$secureBackupPath}");
-        
+
         // Determine output path
         if (!$output) {
             $output = dirname($source);
         }
-        
+
         // Obfuscate the file
-                        $obfuscatedPath = $obfuscator->obfuscateFile($source, null, false, $level);
-        
+        $obfuscatedPath = $obfuscator->obfuscateFile($source, null, false, $level);
+
         // Move obfuscated file to replace original
         if (rename($obfuscatedPath, $source)) {
             $this->info('✅ File securely deployed!');
             $this->info('🔒  Client can no longer access original source code!');
-            
+
             if ($createPackage) {
                 $this->createDeploymentPackage(dirname($source), $output);
             }
-            
+
             return Command::SUCCESS;
         } else {
             $this->error('❌ Failed to deploy file securely!');
@@ -135,20 +136,20 @@ class SecureDeployCommand extends Command
     private function deployDirectory(ObfuscatorService $obfuscator, string $source, ?string $output, array $exclude, string $level, bool $createPackage): int
     {
         $this->info("🔒  Securely deploying directory: {$source}");
-        
+
         // Create secure backup of entire directory
         $secureBackupPath = $this->createSecureBackup($source);
         $this->info("🔒  Original directory securely backed up to: {$secureBackupPath}");
-        
+
         // Determine output path
         if (!$output) {
             $output = dirname($source);
         }
-        
+
         // Get all PHP files
         $phpFiles = $this->getPhpFiles($source, $exclude);
         $this->info("🔒  Found " . count($phpFiles) . " PHP files to obfuscate");
-        
+
         if (empty($phpFiles)) {
             $this->warn("⚠️  No PHP files found to obfuscate!");
             return Command::SUCCESS;
@@ -156,14 +157,14 @@ class SecureDeployCommand extends Command
 
         $successCount = 0;
         $failedCount = 0;
-        
+
         $progressBar = $this->output->createProgressBar(count($phpFiles));
         $progressBar->start();
-        
+
         foreach ($phpFiles as $file) {
             try {
                 $obfuscatedPath = $obfuscator->obfuscateFile($file, null, false, $level);
-                
+
                 // Replace original with obfuscated
                 if (rename($obfuscatedPath, $file)) {
                     $successCount++;
@@ -175,20 +176,20 @@ class SecureDeployCommand extends Command
             }
             $progressBar->advance();
         }
-        
+
         $progressBar->finish();
         $this->newLine(2);
-        
+
         $this->info("🔒  Deployment Summary:");
         $this->info("✅  Successfully deployed: {$successCount} files");
         if ($failedCount > 0) {
             $this->warn("⚠️  Failed to deploy: {$failedCount} files");
         }
-        
+
         if ($createPackage) {
             $this->createDeploymentPackage($source, $output);
         }
-        
+
         return Command::SUCCESS;
     }
 
@@ -201,11 +202,11 @@ class SecureDeployCommand extends Command
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS)
         );
-        
+
         foreach ($iterator as $file) {
             if ($file->isFile() && $file->getExtension() === 'php') {
                 $filePath = $file->getPathname();
-                
+
                 // Check if file should be excluded
                 $shouldExclude = false;
                 foreach ($exclude as $excludePath) {
@@ -214,13 +215,13 @@ class SecureDeployCommand extends Command
                         break;
                     }
                 }
-                
+
                 if (!$shouldExclude) {
                     $files[] = $filePath;
                 }
             }
         }
-        
+
         return $files;
     }
 
@@ -230,10 +231,10 @@ class SecureDeployCommand extends Command
     private function createSecureBackup(string $path): string
     {
         $secureBackupDir = storage_path('app/secure_deployment_backups/' . date('Y-m-d_H-i-s'));
-        
+
         // Ensure proper path handling for Windows
         $secureBackupDir = str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $secureBackupDir);
-        
+
         if (!File::exists($secureBackupDir)) {
             try {
                 File::makeDirectory($secureBackupDir, 0750, true);
@@ -245,19 +246,52 @@ class SecureDeployCommand extends Command
                 }
             }
         }
-        
+
         if (is_dir($path)) {
             $backupPath = $secureBackupDir . DIRECTORY_SEPARATOR . basename($path);
-            File::copyDirectory($path, $backupPath);
+            $this->copyDirectorySafely($path, $backupPath);
         } else {
             $backupPath = $secureBackupDir . DIRECTORY_SEPARATOR . basename($path);
             File::copy($path, $backupPath);
         }
-        
+
         $this->info("🔒  Secure backup created: {$backupPath}");
         $this->warn("🔒  This location is NOT accessible to clients!");
-        
+
         return $backupPath;
+    }
+
+    /**
+     * Copy directory safely, excluding backup directories to prevent recursion
+     */
+    private function copyDirectorySafely(string $source, string $destination): void
+    {
+        if (!File::exists($destination)) {
+            File::makeDirectory($destination, 0755, true);
+        }
+
+        $iterator = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::SELF_FIRST
+        );
+
+        foreach ($iterator as $item) {
+            $relativePath = str_replace($source . DIRECTORY_SEPARATOR, '', $item->getPathname());
+            $destinationPath = $destination . DIRECTORY_SEPARATOR . $relativePath;
+
+            // Skip backup directories to prevent infinite recursion
+            if (strpos($relativePath, 'secure_deployment_backups') !== false) {
+                continue;
+            }
+
+            if ($item->isDir()) {
+                if (!File::exists($destinationPath)) {
+                    File::makeDirectory($destinationPath, 0755, true);
+                }
+            } else {
+                File::copy($item->getPathname(), $destinationPath);
+            }
+        }
     }
 
     /**
@@ -266,15 +300,15 @@ class SecureDeployCommand extends Command
     private function createDeploymentPackage(string $source, string $output): void
     {
         $this->info("📦  Creating deployment package...");
-        
+
         $packageName = 'secure_deployment_' . date('Y-m-d_H-i-s') . '.zip';
         $packagePath = $output . DIRECTORY_SEPARATOR . $packageName;
-        
+
         $zip = new \ZipArchive();
         if ($zip->open($packagePath, \ZipArchive::CREATE) === TRUE) {
             $this->addToZip($zip, $source, basename($source));
             $zip->close();
-            
+
             $this->info("📦  Deployment package created: {$packagePath}");
             $this->info("🔒  This package contains ONLY obfuscated code!");
             $this->info("🔒  Clients cannot reverse-engineer your application!");
